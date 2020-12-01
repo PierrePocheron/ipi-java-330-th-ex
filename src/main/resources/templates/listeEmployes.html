@@ -1,36 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    
-    <title>Gestion des employés</title>
 
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.css}"/>
-    <script src="/webjars/jquery/3.5.1/jquery.min.js" type="application/javascript"></script>
-    <script src="/webjars/bootstrap/4.5.0/js/bootstrap.bundle.min.js" type="application/javascript"></script>
-</head>
+<head th:replace="fragments/header :: head"></head>
 <body>
+<div th:replace="fragments/header :: menu"></div>
 
-<div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="http://localhost:8080/">Gestion des Employés</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li><a href="http://localhost:8080/employes?page=0&amp;size=10&amp;sortProperty=matricule&amp;sortDirection=ASC" class="nav-link">Liste des employés <span class="badge badge-primary" th:text="${employes.totalElements}">2504</span></a></li>
-            </ul>
-
-            <form class="form-inline my-2 my-lg-0" role="search" action="http://localhost:8080/employes" method="GET">
-                <div class="form-group">
-                    <input name="matricule" class="form-control" placeholder="Rechercher un matricule" type="text">
-                </div>
-                <button type="submit" class="btn btn-outline-success ml-2 my-2 my-sm-0">Rechercher</button>
-            </form>
-        </div>
-    </nav>
-</div>
 
 <div class="container">
     <h2>Liste des employés</h2>
@@ -100,6 +75,12 @@
                 <div class="col-lg-6">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
+
+                            <li class="page-item disabled" th:if="${pageNumber} == 1" >
+                                <a  class="page-link" href="#">
+                                    «
+                                </a>
+                            </li>
                             <li class="page-item" th:if="${pageNumber} != 1" >
                                 <a  class="page-link" th:href="@{/employes(page=${previousPage}, size=${param.size}, sortDirection=${param.sortDirection}, sortProperty=${param.sortProperty})}">
                                     «
@@ -110,18 +91,11 @@
                                 <a class="page-link">Page <span th:text="${pageNumber}">1</span></a>
                             </li>
 
-<!--                             a modif-->
-<!--                            <li class="page-item" th:if="${pageNumber} != ${listEmployes.totalPages}">-->
-<!--                                <a class="page-link" th:href="@{/employes(page=${nextPage}, size=${param.size}, sortDirection=${param.sortDirection}, sortProperty=${param.sortProperty})}">-->
-<!--                                    »-->
-<!--                                </a>-->
-<!--                            </li>-->
-                            <li class="page-item" >
+                            <li class="page-item" th:if="${pageNumber} != ${employes.totalPages} ">
                                 <a class="page-link" th:href="@{/employes(page=${nextPage}, size=${param.size}, sortDirection=${param.sortDirection}, sortProperty=${param.sortProperty})}">
                                     »
                                 </a>
                             </li>
-                            
                         </ul>
                     </nav>
                 </div>
