@@ -100,6 +100,7 @@ public class EmployeController {
         return "detail";
     }
 
+
     @RequestMapping(method = RequestMethod.GET, value = "")
     public String listEmployes(final ModelMap model,
                                @RequestParam(defaultValue = "0") Integer page,

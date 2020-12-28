@@ -8,11 +8,16 @@
     <h1>
         Hello <span th:text="${n}"></span>
     </h1>
-    <p>[[${msg}]]</p>
+
+    <p>[[${paragraphe}]]</p>
+
+
+
     <p>[(${msg})]</p>
     <p th:utext="${msg}"></p>
-
-
     <a th:href="@{/sayHello/{msg}}"><p th:text="${msg}"></p></a>
+
+
+
 </body>
 </html>
